@@ -14,12 +14,13 @@ router.post('/', function (req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
     let createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
-    let emailExistsQuery = 'SELECT * FROM users WHERE email = "' + email + '"LIMIT 1';
+    let emailExistsQuery = 'SELECT * FROM users WHERE email = "' + email + '" LIMIT 1';
     let registerQuery = 'INSERT INTO users (user_name,email,password,created_at) VALUES ("' + userName + '", "' + email + '", "' + password + '" , "' + createdAt + '")';
-    console.log(query);
+    console.log(emailExistsQuery);
+    console.log(registerQuery);
     connection.query(emailExistsQuery, function (err, email) {
         let emailExists = email.length;
-        if (emialExists) {
+        if (emailExists) {
             res.render('register', {
                 title: "sign up",
                 emialExists: "そのemailアドレスは既に使われています"
