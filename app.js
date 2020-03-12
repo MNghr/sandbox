@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 let boards = require('./routes/boards');
 let register = require('./routes/register');
 let login = require('./routes/login');
+let logout = require('./routes/logout');
+let setUser = require('./setUser');
 var app = express();
 
 // view engine setup
@@ -27,10 +29,13 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
+app.use('/', setUser, indexRouter);
 app.use('/users', usersRouter);
-app.use('/boards', boards);
+//app.use('/boards', boards);
+app.use('/boards', setUser, boards);
 app.use('/register', register);
+app.use('/logout',logout)
 app.use('/login', login);
 
 
